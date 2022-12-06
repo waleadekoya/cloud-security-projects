@@ -9,6 +9,13 @@ import botocore.exceptions
 
 
 class RotateAccessKey:
+    
+    # Requirements:
+    # 1. AWS secret stored in Secrets Manager having access key and secret key for the specified IAM user
+    # 2. An IAM Role with trust relationship granting the IAM user permission to assume the role
+    # 3. The IAM Role must have policy allowing to retrieve, delete, create and update AWS Secrets Manager
+    # 4. The IAM ROle must have permission to create new secret key for users within AWS account
+    # 5. The secret detials must have 'SecretAccessKey' and 'AccessKeyId' as keys
 
     def __init__(self,
                  role_to_assume: str,
